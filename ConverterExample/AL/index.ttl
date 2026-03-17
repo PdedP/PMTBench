@@ -1,0 +1,45 @@
+@prefix pm: <https://b2share.eudat.eu/records/90aa1d6fa6c74a73adc4e0ba64771367/> .
+@prefix schema: <http://schema.org/> .
+
+<pm:project#ACAP25_961e1fa> a pm:Project ;
+    schema:name "ACAP25" ;
+    schema:codeRepository "https://github.com/mcanthony/ACAP25"^^schema:URL ;
+    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    pm:commit "961e1fa90922efef71894247705670530c24657b" ;
+    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_ACAP25_961e1fa90922efef71894247705670530c24657b.ttl" .
+
+<pm:project#2021sp-420-Team-Indecision_f76d229> a pm:Project ;
+    schema:name "2021sp-420-Team-Indecision" ;
+    schema:codeRepository "https://github.com/mucsci-students/2021sp-420-Team-Indecision"^^schema:URL ;
+    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    pm:commit "f76d2291eea6572c9e2267a90fa76df2cae4ed53" ;
+    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_2021sp-420-Team-Indecision_f76d2291eea6572c9e2267a90fa76df2cae4ed53.ttl" .
+
+<pm:project#30-seconds-of-java_8791499> a pm:Project ;
+    schema:name "30-seconds-of-java" ;
+    schema:codeRepository "https://github.com/shekhargulati/30-seconds-of-java"^^schema:URL ;
+    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    pm:commit "87914992b7043e6a3243a2ac46f24caa15d3b07a" ;
+    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_30-seconds-of-java_87914992b7043e6a3243a2ac46f24caa15d3b07a.ttl" .
+
+<pm:project#Agents_e1b_1345f6d> a pm:Project ;
+    schema:name "Agents_e1b" ;
+    schema:codeRepository "https://github.com/Arquisoft/Agents_e1b"^^schema:URL ;
+    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    pm:commit "1345f6d74b30baf5b214e9b7ab21842debf5a8f2" ;
+    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_Agents_e1b_1345f6d74b30baf5b214e9b7ab21842debf5a8f2.ttl" .
+
+<pm:project#edi-debatcher_0658bc2> a pm:Project ;
+    schema:name "edi-debatcher" ;
+    schema:codeRepository "https://github.com/nullbucket/edi-debatcher"^^schema:URL ;
+    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    pm:commit "0658bc2831d9ef194240cd5032d21afb8a5ec516" ;
+    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_edi-debatcher_0658bc2831d9ef194240cd5032d21afb8a5ec516.ttl" .
+
+<pm:project#mockkid_5ecadf8> a pm:Project ;
+    schema:name "mockkid" ;
+    schema:codeRepository "https://github.com/wirecardBrasil/mockkid"^^schema:URL ;
+    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    pm:commit "5ecadf86c9fa04313cc08680ba4cd16bf4c35546" ;
+    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_mockkid_5ecadf86c9fa04313cc08680ba4cd16bf4c35546.ttl" .
+

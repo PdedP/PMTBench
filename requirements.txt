@@ -1,0 +1,4 @@
+matplotlib==3.8.0
+rdflib==7.1.4
+scikit_learn==1.7.1
+seaborn==0.13.2

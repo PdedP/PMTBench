@@ -1,0 +1,2 @@
+PROJECT_NAME,PROJECT_VERSION,PROJECT_COMMIT,PROJECT_URL,LANGUAGE,TESTSUITE_URL,TESTSUITE_NAME,TARGET_TESTS,EXCLUDED_TESTS,ADDED_TESTS,PAIR_TYPE,CHANNEL
+Csv,1,,https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73,java,https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73/src/test,regular,,,,tc,BOTH

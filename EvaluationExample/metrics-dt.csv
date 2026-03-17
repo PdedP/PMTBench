@@ -1,0 +1,14 @@
+Test-suite level metrics
+,Precision,Recall,F1-score,Support
+KILLED,0.9062,0.6473,0.7552,224
+SURVIVED,0.0706,0.2857,0.1132,21
+Macro,0.4884,0.4665,0.4342,-
+Weighted,0.8346,0.6163,0.7002,-
+
+Accuracy,0.6163
+
+Project,MutationScore_Real,MutationScore_Predicted,Error
+30-seconds-of-java_8791499,0.8929,1.0000,0.1071
+mockkid_5ecadf8,0.9429,0.1905,0.7524
+Average_Error,,,0.4298
+

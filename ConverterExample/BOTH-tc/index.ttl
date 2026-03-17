@@ -1,0 +1,10 @@
+@prefix pm: <https://b2share.eudat.eu/records/90aa1d6fa6c74a73adc4e0ba64771367/> .
+@prefix schema: <http://schema.org/> .
+
+<pm:project#Csv_1> a pm:Project ;
+    schema:name "Csv" ;
+    schema:codeRepository "https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73"^^schema:URL ;
+    schema:citation "<pm:paper#zhao2024spotting>" ; 
+    schema:version "1" ;
+    pm:ttlFile "ConversorExample/BOTH-tc/Projects-TTL/output_Csv_1.ttl" .
+

@@ -1,0 +1,7 @@
+PROJECT_NAME,PROJECT_VERSION,PROJECT_COMMIT,PROJECT_URL,LANGUAGE,TESTSUITE_URL,TESTSUITE_NAME,TARGET_TESTS,EXCLUDED_TESTS,ADDED_TESTS,PAIR_TYPE,CHANNEL
+ACAP25,,961e1fa90922efef71894247705670530c24657b,https://github.com/mcanthony/ACAP25,java,https://github.com/mcanthony/ACAP25/tree/961e1fa90922efef71894247705670530c24657b/src/test,regular,,,,ts,AL
+2021sp-420-Team-Indecision,,f76d2291eea6572c9e2267a90fa76df2cae4ed53,https://github.com/mucsci-students/2021sp-420-Team-Indecision,java,https://github.com/mucsci-students/2021sp-420-Team-Indecision/tree/f76d2291eea6572c9e2267a90fa76df2cae4ed53/src/test,regular,,,,ts,AL
+30-seconds-of-java,,87914992b7043e6a3243a2ac46f24caa15d3b07a,https://github.com/shekhargulati/30-seconds-of-java,java,https://github.com/shekhargulati/30-seconds-of-java/tree/87914992b7043e6a3243a2ac46f24caa15d3b07a/src/test,regular,,,,ts,AL
+Agents_e1b,,1345f6d74b30baf5b214e9b7ab21842debf5a8f2,https://github.com/Arquisoft/Agents_e1b,java,https://github.com/Arquisoft/Agents_e1b/tree/1345f6d74b30baf5b214e9b7ab21842debf5a8f2/src/test,regular,,,,ts,AL
+edi-debatcher,,0658bc2831d9ef194240cd5032d21afb8a5ec516,https://github.com/nullbucket/edi-debatcher,java,https://github.com/nullbucket/edi-debatcher/tree/0658bc2831d9ef194240cd5032d21afb8a5ec516/src/test,regular,,,,ts,AL
+mockkid,,5ecadf86c9fa04313cc08680ba4cd16bf4c35546,https://github.com/wirecardBrasil/mockkid,java,https://github.com/wirecardBrasil/mockkid/tree/5ecadf86c9fa04313cc08680ba4cd16bf4c35546/src/test,regular,,,,ts,AL

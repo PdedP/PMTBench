@@ -1,0 +1,502 @@
+@prefix pm: <https://b2share.eudat.eu/records/90aa1d6fa6c74a73adc4e0ba64771367/> .
+@prefix schema: <http://schema.org/> .
+
+<pm:project#Csv_1> a pm:Project ;
+    schema:name "Csv" ;
+    schema:codeRepository "https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73"^^schema:URL ;
+    schema:citation "<pm:paper#zhao2024spotting>" ; 
+    schema:version "1" ;
+    pm:ttlFile "ConversorExample/BOTH-tc/Projects-TTL/output_Csv_1.ttl" .
+
+<pm:paper#zhao2024spotting> a schema:CreativeWork ;
+    schema:author <mb:person#Yifan.Zhao>, 
+        <mb:person#Yizhou.Chen>,
+        <mb:person#Zeyu.Sun>,
+        <mb:person#Qingyuan.Liang>,
+        <mb:person#Guoqing.Wang>,
+        <mb:person#Dan.Hao> ;
+    schema:name "Spotting Code Mutation for Predictive Mutation Testing" ;
+    schema:sameAs "https://doi.org/10.1145/3691620.3695491" .
+
+<pm:tool#Major_1.3.4> a pm:MutationTool ;
+    schema:name "Major" ;
+    schema:softwareVersion "1.3.4" .
+    
+<pm:tool#Cobertura_2.0.3> a pm:CoverageTool ;
+    schema:name "Cobertura" ;
+    schema:softwareVersion "2.0.3" .
+
+<pm:tool#JaSoMe_v0.6.8-alpha> a pm:AnalysisTool ;
+    schema:name "JaSoMe" ;
+    schema:softwareVersion "v0.6.8-alpha" .
+
+<pm:testsuite#Csv_1_regular> a pm:TestSuite ;
+    schema:name "regular" ;
+    schema:codeRepository "https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73/src/test"^^schema:URL ;
+    pm:partOfProject <pm:project#Csv_1> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testMutators> a pm:Test ;
+    schema:name "testMutators" ;
+    pm:testMethodName "org.apache.commons.csv.CSVFormatTest.testMutators" ;
+    pm:fileName "CSVFormatTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testMutators() {', 'CSVFormat format = new CSVFormat(\\'!\\', \\'!\\', \\'!\\', \\'!\\', true, true, \"\\\\r\\\\n\", null);', '', \"assertEquals('?', format.withDelimiter('?').getDelimiter());\", \"assertEquals('?', format.withEncapsulator('?').getEncapsulator());\", \"assertEquals('?', format.withCommentStart('?').getCommentStart());\", 'assertEquals(\"?\", format.withLineSeparator(\"?\").getLineSeparator());', \"assertEquals('?', format.withEscape('?').getEscape());\", '']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testImmutalibity> a pm:Test ;
+    schema:name "testImmutalibity" ;
+    pm:testMethodName "org.apache.commons.csv.CSVFormatTest.testImmutalibity" ;
+    pm:fileName "CSVFormatTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testImmutalibity() {', 'CSVFormat format = new CSVFormat(\\'!\\', \\'!\\', \\'!\\', \\'!\\', true, true, \"\\\\r\\\\n\", null);', '', \"format.withDelimiter('?');\", \"format.withEncapsulator('?');\", \"format.withCommentStart('?');\", 'format.withLineSeparator(\"?\");', \"format.withEscape('?');\", 'format.withSurroundingSpacesIgnored(false);', 'format.withEmptyLinesIgnored(false);', '', \"assertEquals('!', format.getDelimiter());\", \"assertEquals('!', format.getEncapsulator());\", \"assertEquals('!', format.getCommentStart());\", \"assertEquals('!', format.getEscape());\", 'assertEquals(\"\\\\r\\\\n\", format.getLineSeparator());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken2> a pm:Test ;
+    schema:name "testNextToken2" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testNextToken2" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testNextToken2() throws IOException {', '/*   file:   1,2,3,', '*           a,b x,c', '*', '*           # this is a comment', '*           d,e,', '*', '*/', 'String code = \"1,2,3,\\\\na,b x,c\\\\n#foo\\\\n\\\\nd,e,\\\\n\\\\n\";', \"CSVFormat format = CSVFormat.DEFAULT.withCommentStart('#');\", '', 'CSVLexer parser = getLexer(code, format);', '', '', 'assertTokenEquals(TOKEN, \"1\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"2\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"3\", parser.nextToken(new Token()));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken3> a pm:Test ;
+    schema:name "testNextToken3" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testNextToken3" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testNextToken3() throws IOException {', '/* file: a,\\\\,,b', '*       \\\\,,', '*/', 'String code = \"a,\\\\\\\\,,b\\\\n\\\\\\\\,,\";', \"CSVFormat format = CSVFormat.DEFAULT.withCommentStart('#');\", 'CSVLexer parser = getLexer(code, format);', '', 'assertTokenEquals(TOKEN, \"a\", parser.nextToken(new Token()));', '// an unquoted single backslash is not an escape char', 'assertTokenEquals(TOKEN, \"\\\\\\\\\", parser.nextToken(new Token()));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken4> a pm:Test ;
+    schema:name "testNextToken4" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testNextToken4" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testNextToken4() throws IOException {', '/* file:  a,\"foo\",b', '*        a,   \" foo\",b', '*        a,\"foo \"   ,b     // whitespace after closing encapsulator', '*        a,  \" foo \" ,b', '*/', 'String code = \"a,\\\\\"foo\\\\\",b\\\\na,   \\\\\" foo\\\\\",b\\\\na,\\\\\"foo \\\\\"  ,b\\\\na,  \\\\\" foo \\\\\"  ,b\";', 'CSVLexer parser = getLexer(code, CSVFormat.DEFAULT.withSurroundingSpacesIgnored(true));', 'assertTokenEquals(TOKEN, \"a\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"foo\", parser.nextToken(new Token()));', 'assertTokenEquals(EORECORD, \"b\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"a\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \" foo\", parser.nextToken(new Token()));', 'assertTokenEquals(EORECORD, \"b\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"a\", parser.nextToken(new Token()));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken5> a pm:Test ;
+    schema:name "testNextToken5" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testNextToken5" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testNextToken5() throws IOException {', 'String code = \"a,\\\\\"foo\\\\n\\\\\",b\\\\n\\\\\"foo\\\\n  baar ,,,\\\\\"\\\\n\\\\\"\\\\n\\\\t \\\\n\\\\\"\";', 'CSVLexer parser = getLexer(code, CSVFormat.DEFAULT);', 'assertTokenEquals(TOKEN, \"a\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"foo\\\\n\", parser.nextToken(new Token()));', 'assertTokenEquals(EORECORD, \"b\", parser.nextToken(new Token()));', 'assertTokenEquals(EORECORD, \"foo\\\\n  baar ,,,\", parser.nextToken(new Token()));', 'assertTokenEquals(EOF, \"\\\\n\\\\t \\\\n\", parser.nextToken(new Token()));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken6> a pm:Test ;
+    schema:name "testNextToken6" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testNextToken6" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testNextToken6() throws IOException {', \"/* file: a;'b and \\\\' more\", \"*       '\", '*       !comment;;;;', '*       ;;', '*/']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testDelimiterIsWhitespace> a pm:Test ;
+    schema:name "testDelimiterIsWhitespace" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testDelimiterIsWhitespace" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testDelimiterIsWhitespace() throws IOException {', 'String code = \"one\\\\ttwo\\\\t\\\\tfour \\\\t five\\\\t six\";', 'CSVLexer parser = getLexer(code, CSVFormat.TDF);', 'assertTokenEquals(TOKEN, \"one\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"two\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"four\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"five\", parser.nextToken(new Token()));', 'assertTokenEquals(EOF, \"six\", parser.nextToken(new Token()));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCR> a pm:Test ;
+    schema:name "testGetLineNumberWithCR" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCR" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testGetLineNumberWithCR() throws Exception {', 'CSVParser parser = new CSVParser(\"a\\\\rb\\\\rc\", CSVFormat.DEFAULT.withLineSeparator(\"\\\\r\"));', '', 'assertEquals(0, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(1, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(2, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(2, parser.getLineNumber());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithLF> a pm:Test ;
+    schema:name "testGetLineNumberWithLF" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testGetLineNumberWithLF" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testGetLineNumberWithLF() throws Exception {', 'CSVParser parser = new CSVParser(\"a\\\\nb\\\\nc\", CSVFormat.DEFAULT.withLineSeparator(\"\\\\n\"));', '', 'assertEquals(0, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(1, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(2, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(2, parser.getLineNumber());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCRLF> a pm:Test ;
+    schema:name "testGetLineNumberWithCRLF" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCRLF" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testGetLineNumberWithCRLF() throws Exception {', 'CSVParser parser = new CSVParser(\"a\\\\r\\\\nb\\\\r\\\\nc\", CSVFormat.DEFAULT.withLineSeparator(\"\\\\r\\\\n\"));', '', 'assertEquals(0, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(1, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(2, parser.getLineNumber());', 'assertNotNull(parser.getRecord());', 'assertEquals(2, parser.getLineNumber());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testCarriageReturnLineFeedEndings> a pm:Test ;
+    schema:name "testCarriageReturnLineFeedEndings" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testCarriageReturnLineFeedEndings" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testCarriageReturnLineFeedEndings() throws IOException {', 'String code = \"foo\\\\r\\\\nbaar,\\\\r\\\\nhello,world\\\\r\\\\n,kanu\";', 'CSVParser parser = new CSVParser(new StringReader(code));', 'List<CSVRecord> records = parser.getRecords();', 'assertEquals(4, records.size());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyFile> a pm:Test ;
+    schema:name "testEmptyFile" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testEmptyFile" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testEmptyFile() throws Exception {', 'CSVParser parser = new CSVParser(\"\", CSVFormat.DEFAULT);', 'assertNull(parser.getRecord());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testCarriageReturnEndings> a pm:Test ;
+    schema:name "testCarriageReturnEndings" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testCarriageReturnEndings" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testCarriageReturnEndings() throws IOException {', 'String code = \"foo\\\\rbaar,\\\\rhello,world\\\\r,kanu\";', 'CSVParser parser = new CSVParser(new StringReader(code));', 'List<CSVRecord> records = parser.getRecords();', 'assertEquals(4, records.size());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testProvidedHeader> a pm:Test ;
+    schema:name "testProvidedHeader" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testProvidedHeader" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testProvidedHeader() throws Exception {', 'Reader in = new StringReader(\"a,b,c\\\\n1,2,3\\\\nx,y,z\");', '', 'Iterator<CSVRecord> records = CSVFormat.DEFAULT.withHeader(\"A\", \"B\", \"C\").parse(in).iterator();', '']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testExcelFormat1> a pm:Test ;
+    schema:name "testExcelFormat1" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testExcelFormat1" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testExcelFormat1() throws IOException {', 'String code =', '\"value1,value2,value3,value4\\\\r\\\\na,b,c,d\\\\r\\\\n  x,,,\"', '+ \"\\\\r\\\\n\\\\r\\\\n\\\\\"\\\\\"\\\\\"hello\\\\\"\\\\\"\\\\\",\\\\\"  \\\\\"\\\\\"world\\\\\"\\\\\"\\\\\",\\\\\"abc\\\\ndef\\\\\",\\\\r\\\\n\";', 'String[][] res = {', '{\"value1\", \"value2\", \"value3\", \"value4\"},', '{\"a\", \"b\", \"c\", \"d\"},', '{\"  x\", \"\", \"\", \"\"},']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testExcelFormat2> a pm:Test ;
+    schema:name "testExcelFormat2" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testExcelFormat2" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testExcelFormat2() throws Exception {', 'String code = \"foo,baar\\\\r\\\\n\\\\r\\\\nhello,\\\\r\\\\n\\\\r\\\\nworld,\\\\r\\\\n\";', 'String[][] res = {', '{\"foo\", \"baar\"},', '{\"\"},', '{\"hello\", \"\"},', '{\"\"},', '{\"world\", \"\"}']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testLineFeedEndings> a pm:Test ;
+    schema:name "testLineFeedEndings" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testLineFeedEndings" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testLineFeedEndings() throws IOException {', 'String code = \"foo\\\\nbaar,\\\\nhello,world\\\\n,kanu\";', 'CSVParser parser = new CSVParser(new StringReader(code));', 'List<CSVRecord> records = parser.getRecords();', 'assertEquals(4, records.size());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourCSV> a pm:Test ;
+    schema:name "testEmptyLineBehaviourCSV" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourCSV" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testEmptyLineBehaviourCSV() throws Exception {', 'String[] codes = {', '\"hello,\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\",', '\"hello,\\\\n\\\\n\\\\n\",']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testIgnoreEmptyLines> a pm:Test ;
+    schema:name "testIgnoreEmptyLines" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testIgnoreEmptyLines" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testIgnoreEmptyLines() throws IOException {', 'String code = \"\\\\nfoo,baar\\\\n\\\\r\\\\n,\\\\n\\\\n,world\\\\r\\\\n\\\\n\";', '//String code = \"world\\\\r\\\\n\\\\n\";', '//String code = \"foo;baar\\\\r\\\\n\\\\r\\\\nhello;\\\\r\\\\n\\\\r\\\\nworld;\\\\r\\\\n\";', 'CSVParser parser = new CSVParser(new StringReader(code));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourExcel> a pm:Test ;
+    schema:name "testEmptyLineBehaviourExcel" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourExcel" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testEmptyLineBehaviourExcel() throws Exception {', 'String[] codes = {', '\"hello,\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\",', '\"hello,\\\\n\\\\n\\\\n\",']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetRecords> a pm:Test ;
+    schema:name "testGetRecords" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testGetRecords" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testGetRecords() throws IOException {', 'CSVParser parser = new CSVParser(new StringReader(code), CSVFormat.DEFAULT.withSurroundingSpacesIgnored(true));', 'List<CSVRecord> records = parser.getRecords();', 'assertEquals(res.length, records.size());', 'assertTrue(records.size() > 0);', 'for (int i = 0; i < res.length; i++) {']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testIterator> a pm:Test ;
+    schema:name "testIterator" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testIterator" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testIterator() throws Exception {', 'Reader in = new StringReader(\"a,b,c\\\\n1,2,3\\\\nx,y,z\");', '', 'Iterator<CSVRecord> iterator = CSVFormat.DEFAULT.parse(in).iterator();', '', 'assertTrue(iterator.hasNext());', 'try {', 'iterator.remove();', 'fail(\"expected UnsupportedOperationException\");', '} catch (UnsupportedOperationException expected) {', '}', 'assertArrayEquals(new String[]{\"a\", \"b\", \"c\"}, iterator.next().values());', 'assertArrayEquals(new String[]{\"1\", \"2\", \"3\"}, iterator.next().values());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter2> a pm:Test ;
+    schema:name "testPrinter2" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter2" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter2() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a,b\", \"b\");', 'assertEquals(\"\\\\\"a,b\\\\\",b\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter3> a pm:Test ;
+    schema:name "testPrinter3" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter3" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter3() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a, b\", \"b \");', 'assertEquals(\"\\\\\"a, b\\\\\",\\\\\"b \\\\\"\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter4> a pm:Test ;
+    schema:name "testPrinter4" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter4" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter4() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a\", \"b\\\\\"c\");', 'assertEquals(\"a,\\\\\"b\\\\\"\\\\\"c\\\\\"\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter5> a pm:Test ;
+    schema:name "testPrinter5" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter5" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter5() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a\", \"b\\\\nc\");', 'assertEquals(\"a,\\\\\"b\\\\nc\\\\\"\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter6> a pm:Test ;
+    schema:name "testPrinter6" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter6" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter6() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a\", \"b\\\\r\\\\nc\");', 'assertEquals(\"a,\\\\\"b\\\\r\\\\nc\\\\\"\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter7> a pm:Test ;
+    schema:name "testPrinter7" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter7" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter7() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a\", \"b\\\\\\\\c\");', 'assertEquals(\"a,b\\\\\\\\c\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testSingleLineComment> a pm:Test ;
+    schema:name "testSingleLineComment" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testSingleLineComment" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testSingleLineComment() throws IOException {', 'StringWriter sw = new StringWriter();', \"CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT.withCommentStart('#'));\", 'printer.printComment(\"This is a comment\");', '']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testMultiLineComment> a pm:Test ;
+    schema:name "testMultiLineComment" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testMultiLineComment" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testMultiLineComment() throws IOException {', 'StringWriter sw = new StringWriter();', \"CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT.withCommentStart('#'));\", 'printer.printComment(\"This is a comment\\\\non multiple lines\");', '']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrintNullValues> a pm:Test ;
+    schema:name "testPrintNullValues" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrintNullValues" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrintNullValues() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a\", null, \"b\");', 'assertEquals(\"a,,b\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testExcelPrinter1> a pm:Test ;
+    schema:name "testExcelPrinter1" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testExcelPrinter1" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testExcelPrinter1() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.EXCEL);', 'printer.println(\"a\", \"b\");', 'assertEquals(\"a,b\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testExcelPrinter2> a pm:Test ;
+    schema:name "testExcelPrinter2" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testExcelPrinter2" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testExcelPrinter2() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.EXCEL);', 'printer.println(\"a,b\", \"b\");', 'assertEquals(\"\\\\\"a,b\\\\\",b\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testDisabledComment> a pm:Test ;
+    schema:name "testDisabledComment" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testDisabledComment" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testDisabledComment() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.printComment(\"This is a comment\");', '']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testValidation> a pm:Test ;
+    schema:name "testValidation" ;
+    pm:testMethodName "org.apache.commons.csv.CSVFormatTest.testValidation" ;
+    pm:fileName "CSVFormatTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testValidation() {', 'CSVFormat format = CSVFormat.DEFAULT;', '', 'try {', \"format.withDelimiter('\\\\n');\", 'fail();', '} catch (IllegalArgumentException e) {', '// expected', '}', '', 'try {', \"format.withEscape('\\\\r');\", 'fail();']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testForEach> a pm:Test ;
+    schema:name "testForEach" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testForEach" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testForEach() throws Exception {', 'List<CSVRecord> records = new ArrayList<CSVRecord>();', '', 'Reader in = new StringReader(\"a,b,c\\\\n1,2,3\\\\nx,y,z\");', '', 'for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {', 'records.add(record);', '}']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLine> a pm:Test ;
+    schema:name "testGetLine" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testGetLine" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testGetLine() throws IOException {', 'CSVParser parser = new CSVParser(new StringReader(code), CSVFormat.DEFAULT.withSurroundingSpacesIgnored(true));', 'for (String[] re : res) {', 'assertArrayEquals(re, parser.getRecord().values());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testBackslashEscaping2> a pm:Test ;
+    schema:name "testBackslashEscaping2" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testBackslashEscaping2" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testBackslashEscaping2() throws IOException {', '', '// To avoid confusion over the need for escaping chars in java code,', '// We will test with a forward slash as the escape char, and a single', '// quote as the encapsulator.', '', 'String code = \"\"', '+ \" , , \\\\n\"           // 1)']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviourExcel> a pm:Test ;
+    schema:name "testEndOfFileBehaviourExcel" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviourExcel" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testEndOfFileBehaviourExcel() throws Exception {', 'String[] codes = {', '\"hello,\\\\r\\\\n\\\\r\\\\nworld,\\\\r\\\\n\",', '\"hello,\\\\r\\\\n\\\\r\\\\nworld,\",']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testBackslashEscaping> a pm:Test ;
+    schema:name "testBackslashEscaping" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testBackslashEscaping" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testBackslashEscaping() throws IOException {', '', '// To avoid confusion over the need for escaping chars in java code,', '// We will test with a forward slash as the escape char, and a single', '// quote as the encapsulator.', '', 'String code =', '\"one,two,three\\\\n\" // 0']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviorCSV> a pm:Test ;
+    schema:name "testEndOfFileBehaviorCSV" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviorCSV" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testEndOfFileBehaviorCSV() throws Exception {', 'String[] codes = {', '\"hello,\\\\r\\\\n\\\\r\\\\nworld,\\\\r\\\\n\",', '\"hello,\\\\r\\\\n\\\\r\\\\nworld,\",']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testHeader> a pm:Test ;
+    schema:name "testHeader" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testHeader" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testHeader() throws Exception {', 'Reader in = new StringReader(\"a,b,c\\\\n1,2,3\\\\nx,y,z\");', '', 'Iterator<CSVRecord> records = CSVFormat.DEFAULT.withHeader().parse(in).iterator();', '']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter1> a pm:Test ;
+    schema:name "testPrinter1" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testPrinter1" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testPrinter1() throws IOException {', 'StringWriter sw = new StringWriter();', 'CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT);', 'printer.println(\"a\", \"b\");', 'assertEquals(\"a,b\" + lineSeparator, sw.toString());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken1> a pm:Test ;
+    schema:name "testNextToken1" ;
+    pm:testMethodName "org.apache.commons.csv.CSVLexerTest.testNextToken1" ;
+    pm:fileName "CSVLexerTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testNextToken1() throws IOException {', 'String code = \"abc,def, hijk,  lmnop,   qrst,uv ,wxy   ,z , ,\";', 'CSVLexer parser = getLexer(code, CSVFormat.DEFAULT.withSurroundingSpacesIgnored(true));', 'assertTokenEquals(TOKEN, \"abc\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"def\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"hijk\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"lmnop\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"qrst\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"uv\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"wxy\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"z\", parser.nextToken(new Token()));', 'assertTokenEquals(TOKEN, \"\", parser.nextToken(new Token()));', 'assertTokenEquals(EOF, \"\", parser.nextToken(new Token()));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testDefaultFormat> a pm:Test ;
+    schema:name "testDefaultFormat" ;
+    pm:testMethodName "org.apache.commons.csv.CSVParserTest.testDefaultFormat" ;
+    pm:fileName "CSVParserTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testDefaultFormat() throws IOException {', 'String code = \"\"', '+ \"a,b\\\\n\"            // 1)', '+ \"\\\\\"\\\\n\\\\\",\\\\\" \\\\\"\\\\n\"   // 2)', '+ \"\\\\\"\\\\\",#\\\\n\"   // 2)', ';', 'String[][] res = {', '{\"a\", \"b\"},', '{\"\\\\n\", \" \"},', '{\"\", \"#\"},', '};', '', 'CSVFormat format = CSVFormat.DEFAULT;', 'assertEquals(CSVFormat.DISABLED, format.getCommentStart());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testFormat> a pm:Test ;
+    schema:name "testFormat" ;
+    pm:testMethodName "org.apache.commons.csv.CSVFormatTest.testFormat" ;
+    pm:fileName "CSVFormatTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testFormat() {', 'CSVFormat format = CSVFormat.DEFAULT;', '', 'assertEquals(\"\", format.format());', 'assertEquals(\"a,b,c\", format.format(\"a\", \"b\", \"c\"));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testSerialization> a pm:Test ;
+    schema:name "testSerialization" ;
+    pm:testMethodName "org.apache.commons.csv.CSVFormatTest.testSerialization" ;
+    pm:fileName "CSVFormatTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testSerialization() throws Exception {', 'ByteArrayOutputStream out = new ByteArrayOutputStream();', '', 'ObjectOutputStream oos = new ObjectOutputStream(out);', 'oos.writeObject(CSVFormat.DEFAULT);', 'oos.flush();', 'oos.close();', '', 'ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(out.toByteArray()));', 'CSVFormat format = (CSVFormat) in.readObject();', '', 'assertNotNull(format);', 'assertEquals(\"delimiter\", CSVFormat.DEFAULT.getDelimiter(), format.getDelimiter());', 'assertEquals(\"encapsulator\", CSVFormat.DEFAULT.getEncapsulator(), format.getEncapsulator());', 'assertEquals(\"comment start\", CSVFormat.DEFAULT.getCommentStart(), format.getCommentStart());', 'assertEquals(\"line separator\", CSVFormat.DEFAULT.getLineSeparator(), format.getLineSeparator());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testRandom> a pm:Test ;
+    schema:name "testRandom" ;
+    pm:testMethodName "org.apache.commons.csv.CSVPrinterTest.testRandom" ;
+    pm:fileName "CSVPrinterTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testRandom() throws Exception {', 'int iter = 10000;', 'doRandom(CSVFormat.DEFAULT, iter);', 'doRandom(CSVFormat.EXCEL, iter);', 'doRandom(CSVFormat.MYSQL, iter);']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLine> a pm:Test ;
+    schema:name "testReadLine" ;
+    pm:testMethodName "org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLine" ;
+    pm:fileName "ExtendedBufferedReaderTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testReadLine() throws Exception {', 'ExtendedBufferedReader br = getBufferedReader(\"\");', 'assertNull(br.readLine());', '', 'br = getBufferedReader(\"\\\\n\");', 'assertEquals(\"\",br.readLine());', 'assertNull(br.readLine());', '', 'br = getBufferedReader(\"foo\\\\n\\\\nhello\");', 'assertEquals(0, br.getLineNumber());', 'assertEquals(\"foo\",br.readLine());', 'assertEquals(1, br.getLineNumber());', 'assertEquals(\"\",br.readLine());', 'assertEquals(2, br.getLineNumber());', 'assertEquals(\"hello\",br.readLine());', 'assertEquals(3, br.getLineNumber());', 'assertNull(br.readLine());', 'assertEquals(3, br.getLineNumber());', '', 'br = getBufferedReader(\"foo\\\\n\\\\nhello\");', \"assertEquals('f', br.read());\", \"assertEquals('o', br.lookAhead());\", 'assertEquals(\"oo\",br.readLine());', 'assertEquals(1, br.getLineNumber());', \"assertEquals('\\\\n', br.lookAhead());\", 'assertEquals(\"\",br.readLine());', 'assertEquals(2, br.getLineNumber());', \"assertEquals('h', br.lookAhead());\", 'assertEquals(\"hello\",br.readLine());', 'assertNull(br.readLine());', 'assertEquals(3, br.getLineNumber());', '', '', 'br = getBufferedReader(\"foo\\\\rbaar\\\\r\\\\nfoo\");', 'assertEquals(\"foo\",br.readLine());']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.ExtendedBufferedReaderTest.testEmptyInput> a pm:Test ;
+    schema:name "testEmptyInput" ;
+    pm:testMethodName "org.apache.commons.csv.ExtendedBufferedReaderTest.testEmptyInput" ;
+    pm:fileName "ExtendedBufferedReaderTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testEmptyInput() throws Exception {', 'ExtendedBufferedReader br = getBufferedReader(\"\");', 'assertEquals(ExtendedBufferedReader.END_OF_STREAM, br.read());', 'assertEquals(ExtendedBufferedReader.END_OF_STREAM, br.lookAhead());', 'assertEquals(ExtendedBufferedReader.END_OF_STREAM, br.readAgain());', 'assertNull(br.readLine());', 'assertEquals(0, br.read(new char[10], 0, 0));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:test#Csv_1_regular_org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead2> a pm:Test ;
+    schema:name "testReadLookahead2" ;
+    pm:testMethodName "org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead2" ;
+    pm:fileName "ExtendedBufferedReaderTest.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:testMethodCode "['public void testReadLookahead2() throws Exception {', 'char[] ref = new char[5];', 'char[] res = new char[5];', '', 'ExtendedBufferedReader br = getBufferedReader(\"abcdefg\");', \"ref[0] = 'a';\", \"ref[1] = 'b';\", \"ref[2] = 'c';\", 'assertEquals(3, br.read(res, 0, 3));', 'assertArrayEquals(ref, res);', \"assertEquals('c', br.readAgain());\", '', \"assertEquals('d', br.lookAhead());\", \"ref[4] = 'd';\", 'assertEquals(1, br.read(res, 4, 1));']" ;
+    pm:partOfTestSuite <pm:testsuite#Csv_1_regular> .
+
+<pm:mutant#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4> a pm:Mutant ;
+    pm:generatedByTool <pm:tool#Major_1.3.4> ;
+    pm:method "isLineBreak(char)" ;
+    pm:line 169 ;
+    pm:operator "ROR" ;
+    pm:count 6 ;
+    pm:originalFile <pm:file#Csv_1_org.apache.commons.csv.CSVFormat.java> .
+
+<pm:staticAnalysis#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4> a pm:StaticAnalysis ;
+    pm:analyzedMutant <pm:mutant#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4> ;
+    pm:analyzedByTool <pm:tool#JaSoMe_v0.6.8-alpha> ;
+    pm:typeReturn "Z" ;
+    pm:DIT 1 ;
+    pm:NOCh 0 ;
+    pm:VG 1 ;
+    pm:TLOC 3 ;
+    pm:NBD 1 ;
+    pm:Ce 0 ;
+    pm:Ca 0 ;
+    pm:I 0 .
+
+<pm:naturalLanguage#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4> a pm:NaturalLanguage ;
+    pm:refersToMutant <pm:mutant#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4> ;
+    pm:SrcLines ( "private static boolean isLineBreak(char c) {" "return c == '\n' || c == '\r';" ) ;
+    pm:MutSrcLineNo "1" ;
+    pm:Before "c == '\n'" ;
+    pm:After "c <= '\n'" ;
+    pm:BeforePMT "c, ==, '\n'," ;
+    pm:AfterPMT "c, <=, '\n'," ;
+    pm:Body "return c == '\n' || c,  == '\r';" .
+
+<pm:execution#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4_Csv_1_regular> a pm:Execution ;
+    pm:label "KILLED" ;
+    pm:analyzedByTool <pm:tool#Cobertura_2.0.3> ;
+    pm:executedOnMutant <pm:mutant#Csv_1_org.apache.commons.csv.CSVFormat.java_169_ROR_6_Major_1.3.4> ;
+    pm:executedByTestSuite <pm:testsuite#Csv_1_regular> ;
+    pm:executedByTestCases (<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testMutators> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testImmutalibity> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken3> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken4> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken5> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken6> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testDelimiterIsWhitespace> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCR> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithLF> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCRLF> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testCarriageReturnLineFeedEndings> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyFile> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testCarriageReturnEndings> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testProvidedHeader> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testExcelFormat1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testExcelFormat2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testLineFeedEndings> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourCSV> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testIgnoreEmptyLines> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourExcel> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetRecords> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testIterator> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter3> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter4> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter5> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter6> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter7> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testSingleLineComment> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testMultiLineComment> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrintNullValues> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testExcelPrinter1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testExcelPrinter2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testDisabledComment> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testValidation> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testForEach> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLine> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testBackslashEscaping2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviourExcel> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testBackslashEscaping> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviorCSV> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testHeader> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testDefaultFormat> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testFormat> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testSerialization> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testRandom>) ;
+    pm:killedByTestCases (<pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testMutators> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testImmutalibity> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken3> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken4> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken5> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken6> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testDelimiterIsWhitespace> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCR> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithLF> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLineNumberWithCRLF> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testCarriageReturnLineFeedEndings> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyFile> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testCarriageReturnEndings> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testProvidedHeader> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testExcelFormat1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testExcelFormat2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testLineFeedEndings> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourCSV> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testIgnoreEmptyLines> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEmptyLineBehaviourExcel> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetRecords> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testIterator> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter3> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter4> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter5> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter6> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter7> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testSingleLineComment> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testMultiLineComment> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrintNullValues> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testExcelPrinter1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testExcelPrinter2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testDisabledComment> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testValidation> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testForEach> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testGetLine> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testBackslashEscaping2> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviourExcel> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testBackslashEscaping> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testEndOfFileBehaviorCSV> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testHeader>) ;
+    pm:survivedToTestCases (<pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testPrinter1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVLexerTest.testNextToken1> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVParserTest.testDefaultFormat> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testFormat> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVFormatTest.testSerialization> <pm:test#Csv_1_regular_org.apache.commons.csv.CSVPrinterTest.testRandom>) ;
+    pm:NumExecuteCovered (4 1 1 3 2 4 1 1 3 1 5 4 1 1 1 1 4 3 2 1 2 5 3 2 4 3 1 1 5 1 2 2 3 4 1 1 5 1 1 3 3 1 2 1 5 2 4 1 3) ;
+    pm:NumMutantAssertion (1 2 4 0 3 3 2 5 1 0 4 1 0 5 2 3 0 4 1 5 2 3 2 0 1 4 5 3 2 1 0 5 4 3 0 2 1 5 4 0 1 3 5 2 0 1 3 2 4) .
+
+<pm:file#Csv_1_org.apache.commons.csv.CSVFormat.java> a pm:File ;
+    schema:name "CSVFormat" ;
+    schema:programmingLanguage "java" ;
+    pm:extension "java" ;
+    pm:fileName "CSVFormat.java" ;
+    pm:package "org.apache.commons.csv" ;
+    pm:partOfProject <pm:project#Csv_1> .
