@@ -8,6 +8,7 @@ def main():
     parser.add_argument("--training_file", type=str, required=True, help="Path to the training CSV file")
     parser.add_argument("--test_file", type=str, required=True, help="Path to the test CSV file")
     parser.add_argument("--output_file", type=str, required=True, help="Path to output results CSV file")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility (default: 42)")
     
     args = parser.parse_args()
 
@@ -24,7 +25,7 @@ def main():
     y_test = test_data["Label"]
 
     # Train the model
-    model = DecisionTreeClassifier(random_state=42)
+    model = DecisionTreeClassifier(random_state=args.seed)
     model.fit(X_train, y_train)
 
     # Make predictions

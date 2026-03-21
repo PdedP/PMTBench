@@ -1,22 +1,22 @@
 Test-case level metrics
 ,Precision,Recall,F1-score,Support
-KILLED,0.4123,0.4870,0.4465,4641
-SURVIVED,0.5797,0.5048,0.5396,6506
-Macro,0.4960,0.4959,0.4931,-
-Weighted,0.5100,0.4974,0.5009,-
+KILLED,0.4143,0.4992,0.4528,4641
+SURVIVED,0.5816,0.4965,0.5357,6506
+Macro,0.4979,0.4979,0.4942,-
+Weighted,0.5119,0.4976,0.5012,-
 
-Accuracy,0.4974
+Accuracy,0.4976
 
 Test-suite level metrics
 ,Precision,Recall,F1-score,Support
-KILLED,0.6798,0.9528,0.7934,254
-SURVIVED,0.6667,0.1739,0.2759,138
-Macro,0.6732,0.5633,0.5347,-
-Weighted,0.6752,0.6786,0.6112,-
+KILLED,0.6749,0.9724,0.7968,254
+SURVIVED,0.7308,0.1377,0.2317,138
+Macro,0.7028,0.5551,0.5142,-
+Weighted,0.6945,0.6786,0.5978,-
 
 Accuracy,0.6786
 
 Project,MutationScore_Real,MutationScore_Predicted,Error
-Csv_5,0.6480,0.9082,0.2602
-Average_Error,,,0.2602
+Csv_5,0.6480,0.9337,0.2857
+Average_Error,,,0.2857
 

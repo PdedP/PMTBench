@@ -6,7 +6,7 @@
     schema:codeRepository "https://github.com/apache/commons-csv/tree/73cc5246cf789db8f459e2f539831b6e91bedd26"^^schema:URL ;
     schema:citation "<pm:paper#zhao2024spotting>" ; 
     schema:version "5" ;
-    pm:ttlFile "ConversorExample/NL-tc/Projects-TTL/output_Csv_5.ttl" .
+    pm:ttlFile "ConverterExample/NL-tc/Projects-TTL/output_Csv_5.ttl" .
 
 <pm:paper#zhao2024spotting> a schema:CreativeWork ;
     schema:author <mb:person#Yifan.Zhao>, 

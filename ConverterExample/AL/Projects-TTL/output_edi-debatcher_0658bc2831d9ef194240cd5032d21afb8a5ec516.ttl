@@ -6,7 +6,7 @@
     schema:codeRepository "https://github.com/nullbucket/edi-debatcher"^^schema:URL ;
     schema:citation "<pm:paper#pmtbenchAL>" ; 
     pm:commit "0658bc2831d9ef194240cd5032d21afb8a5ec516" ;
-    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_edi-debatcher_0658bc2831d9ef194240cd5032d21afb8a5ec516.ttl" .
+    pm:ttlFile "ConverterExample/AL/Projects-TTL/output_edi-debatcher_0658bc2831d9ef194240cd5032d21afb8a5ec516.ttl" .
 
 <pm:tool#PIT_1.15.8> a pm:MutationTool ;
     schema:name "PIT" ;

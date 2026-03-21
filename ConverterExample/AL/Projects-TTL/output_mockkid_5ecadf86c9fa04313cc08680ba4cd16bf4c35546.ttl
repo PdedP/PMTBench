@@ -6,7 +6,7 @@
     schema:codeRepository "https://github.com/wirecardBrasil/mockkid"^^schema:URL ;
     schema:citation "<pm:paper#pmtbenchAL>" ; 
     pm:commit "5ecadf86c9fa04313cc08680ba4cd16bf4c35546" ;
-    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_mockkid_5ecadf86c9fa04313cc08680ba4cd16bf4c35546.ttl" .
+    pm:ttlFile "ConverterExample/AL/Projects-TTL/output_mockkid_5ecadf86c9fa04313cc08680ba4cd16bf4c35546.ttl" .
 
 <pm:tool#PIT_1.15.8> a pm:MutationTool ;
     schema:name "PIT" ;

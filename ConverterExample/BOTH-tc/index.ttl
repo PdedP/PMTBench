@@ -6,5 +6,5 @@
     schema:codeRepository "https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73"^^schema:URL ;
     schema:citation "<pm:paper#zhao2024spotting>" ; 
     schema:version "1" ;
-    pm:ttlFile "ConversorExample/BOTH-tc/Projects-TTL/output_Csv_1.ttl" .
+    pm:ttlFile "ConverterExample/BOTH-tc/Projects-TTL/output_Csv_1.ttl" .
 

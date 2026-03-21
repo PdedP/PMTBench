@@ -1,5 +1,6 @@
 
 
+
 # PMTBench
 
 **PMTBench** is an open-source framework that helps researchers work with datasets and models for Predictive Mutation Testing (PMT). It is designed to improve how PMT datasets are documented, shared, and reused,  and to support the experimentation with PMT models, making it easier to compare results and reproduce PMT studies.
@@ -186,6 +187,7 @@ To evaluate a PMT model with PMTBench, you will need to provide a script that ha
 -   `--training_file`: path to the CSV file with training data.
 -   `--test_file`: path to the CSV file with test data.
 -   `--output_file`: path where the script should write its predictions.
+-   `--seed`: random seed for reproducibility (optional).
     
 The script should generate a CSV file with one row per mutant. Each row should include at least three columns: one for the project, one for the true label, and one for the predicted label. The column names have to be exactly `Project`, `True Label` and `Predicted Label`. Optionally, a fourth column named `Killing Probability` can be included, with a list of predicted probabilities. This is explained in further detail below.
 
@@ -237,6 +239,18 @@ python3 main.py \
 ```
 After running the script, PMTBench uses the generated `split_8020_predicted.csv` file to evaluate the model performance and print test-suite level metrics.
 
+By default, PMTBench uses a fixed random seed so that results are fully reproducible. If you want to use a different seed, you can pass it with the `--seed` option, as shown in the following command:
+```
+python3 main.py \
+    -i EvaluationExample/index.ttl \
+    -p 80,20 \
+    -c pmtbenchAL \
+    -b execution \
+    -o EvaluationExample/split_8020.csv \
+    --ml_script EvaluationExample/decision_tree.py
+    --seed 25
+```
+
 #### Test-case level prediction
 
 The model has to assign a list of labels (`KILLED` or `SURVIVED`) and, optionally, a list of killing probabilites per mutant, one for each of the test cases covering the mutant.  Example:
@@ -282,8 +296,6 @@ python3 main.py \
 ```
 After running the script, PMTBench uses the generated `split_Csv_1_5_predicted.csv` file to evaluate model performance and print test-case and test-suite level metrics. 
 
-> **Note:**  The results will differ from execution to execution, as the predictions are random.
-
 ##### Aggregation based on probabilities
 
 The `EvaluationExample` directory also includes a script called `sim_testcase_pred_prob.py`, which also outputs a list of random killing probabilities. You can then run the evaluation with multiple thresholds as follows:
@@ -323,10 +335,12 @@ This command runs the provided model on the existing data and produces the same 
 
 This project requires **Python >= 3.9** and depends on the following Python packages:
 
-* matplotlib==3.8.0
-* rdflib==7.1.4
-* scikit_learn==1.7.1
+* matplotlib==3.10.8
+* rdflib==7.6.0
+* scikit-learn==1.7.2
 * seaborn==0.13.2
+* numpy==2.2.6
+
 
 ###  Steps
 

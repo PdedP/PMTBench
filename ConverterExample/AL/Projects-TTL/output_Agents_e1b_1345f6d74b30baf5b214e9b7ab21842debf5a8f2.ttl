@@ -6,7 +6,7 @@
     schema:codeRepository "https://github.com/Arquisoft/Agents_e1b"^^schema:URL ;
     schema:citation "<pm:paper#pmtbenchAL>" ; 
     pm:commit "1345f6d74b30baf5b214e9b7ab21842debf5a8f2" ;
-    pm:ttlFile "ConversorExample/AL/Projects-TTL/output_Agents_e1b_1345f6d74b30baf5b214e9b7ab21842debf5a8f2.ttl" .
+    pm:ttlFile "ConverterExample/AL/Projects-TTL/output_Agents_e1b_1345f6d74b30baf5b214e9b7ab21842debf5a8f2.ttl" .
 
 <pm:tool#PIT_1.15.8> a pm:MutationTool ;
     schema:name "PIT" ;
