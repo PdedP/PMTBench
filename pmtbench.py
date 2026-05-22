@@ -5,6 +5,7 @@ import random
 import subprocess
 import ast
 import sys
+import yaml
 from pathlib import Path
 from collections import defaultdict
 
@@ -865,12 +866,132 @@ def extract_ttl_files(index_file, projects, citation):
     return ttl_files, project_ids
 
 
+# Function to load configuration parameters from a configuration file
+def load_config_file(config_path: str) -> dict:
+    """
+    Load YAML configuration file. Returns empty dict if no config is provided.
+    
+    :param config_path: Path to the YAML configuration file.
+    """
+    if not config_path:
+        return {}
+
+    path = Path(config_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {config_path}")
+
+    with open(path, "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
+
+    # Version check: ensures compatibility between the config file format and the current PMTBench version
+    version = config.get("config_version", 1)
+    if version != 1:
+        raise ValueError(
+            f"Unsupported config_version: {version}. Expected 1."
+        )
+
+    return config or {}
+
+# Function to maintain CSV format
+def to_csv(value):
+    if value is None:
+        return None
+    if isinstance(value, list):
+        return ",".join(map(str, value))
+    return value
+
+
+# Function to flatten the YAML configuration file
+def flatten_config(cfg: dict) -> dict:
+    """
+    Convert nested YAML config into flat dictionary with keys matching CLI argument names.
+    
+    :param cfg: Parsed YAML configuration as a nested dictionary.
+    """
+    flat = {}
+
+    # filters
+    filters = cfg.get("filters", {})
+    flat["language"] = filters.get("language")
+    flat["tool"] = filters.get("tool")
+    flat["citation"] = filters.get("citation")
+    flat["projects"] = to_csv(filters.get("projects"))
+    flat["blocks"] = filters.get("blocks")
+
+    # reproducibility
+    repro = cfg.get("reproducibility", {})
+    flat["seed"] = repro.get("seed")
+
+    # partitioning
+    part = cfg.get("partitioning", {})
+    flat["partition"] = to_csv(part.get("partition"))
+    flat["train_projects"] = to_csv(part.get("train_projects"))
+    flat["val_projects"] = to_csv(part.get("val_projects"))
+    flat["test_projects"] = to_csv(part.get("test_projects"))
+    flat["existing_data"] = part.get("existing_data")
+    flat["training_file"] = part.get("training_file")
+    flat["test_file"] = part.get("test_file")
+
+    # ml
+    ml = cfg.get("ml", {})
+    flat["ml_script"] = ml.get("ml_script")
+    flat["thresholds"] = to_csv(ml.get("thresholds"))
+
+    # evaluation
+    ev = cfg.get("evaluation", {})
+    flat["confusion_matrix_file"] = ev.get("confusion_matrix_file")
+    flat["metrics_csv_file"] = ev.get("metrics_csv_file")
+
+    # io
+    io = cfg.get("io", {})
+    flat["index"] = io.get("index")
+    flat["output"] = io.get("output")
+
+    return flat
+
+
+# Function to merge the parameters provided in the configuration file and command line.
+def merge_config_and_args(args, cfg_flat: dict, parser) -> dict:
+    """
+    Merge CLI arguments with configuration file values.
+    Priority order:
+        1. Default values (argparse defaults)
+        2. Configuration file (YAML)
+        3. Command-line arguments (highest priority)
+
+    :param args: Parsed command-line arguments (argparse Namespace).
+    :param cfg_flat: Flattened configuration dictionary obtained from YAML.
+    :param parser: Parser of args.
+    """
+    final = vars(args).copy()
+
+    for key, value in cfg_flat.items():
+        if value is None:
+            continue
+
+        cli_value = getattr(args, key, None)
+        default_value = parser.get_default(key)
+
+        # Case 1: CLI value is still default → YAML wins
+        if cli_value == default_value:
+            final[key] = value
+
+        # Case 2: CLI explicitly provided → CLI wins
+        else:
+            final[key] = cli_value
+
+    return final
+
+
 # Function to parse the arguments
 def parse_arguments():
     """
     Parse the command-line arguments.
     """
     parser = argparse.ArgumentParser(description="Process mutants for use in ML models.")
+
+    # Configuration file
+    parser.add_argument("-cfg", "--config", type=str, default=None, help="Path to YAML configuration file.")
 
     # Arguments related to filters
     parser.add_argument("-l", "--language", type=str, help="Filter by programming language.")
@@ -956,8 +1077,16 @@ def parse_arguments():
     parser.add_argument("-i", "--index", type=str, default="index.ttl", help="Path to the index.ttl file.")
     parser.add_argument("-o", "--output", type=str, default="output.csv", help="Name of the output CSV file.")
 
-    # Parse arguments and set determinism immediately
+    # Parse arguments
     args = parser.parse_args()
+
+    # Load configuration file (if any), flatten the file, and merge
+    cfg = load_config_file(args.config)
+    cfg_flat = flatten_config(cfg)
+    merged = merge_config_and_args(args, cfg_flat, parser)
+    args = argparse.Namespace(**merged)
+
+    # Set determinism
     set_global_determinism(args.seed)
 
     # Parse lists of projects
