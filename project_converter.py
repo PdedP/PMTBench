@@ -491,7 +491,7 @@ def build_project_rdf(config):
 <pm:project#{project_id}> a pm:Project ;
     schema:name "{project_name}" ;
     schema:codeRepository "{project_url}"^^schema:URL ;
-    schema:citation "{citation_id}" ; 
+    schema:citation {citation_id} ; 
     schema:version "{project_version}" ;
     pm:ttlFile "{project_ttl}" .
 """.strip())

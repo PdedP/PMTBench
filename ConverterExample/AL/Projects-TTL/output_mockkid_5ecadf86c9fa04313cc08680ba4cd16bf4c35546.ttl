@@ -4,7 +4,7 @@
 <pm:project#mockkid_5ecadf8> a pm:Project ;
     schema:name "mockkid" ;
     schema:codeRepository "https://github.com/wirecardBrasil/mockkid"^^schema:URL ;
-    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    schema:citation <pm:paper#pmtbenchAL> ; 
     pm:commit "5ecadf86c9fa04313cc08680ba4cd16bf4c35546" ;
     pm:ttlFile "ConverterExample/AL/Projects-TTL/output_mockkid_5ecadf86c9fa04313cc08680ba4cd16bf4c35546.ttl" .
 

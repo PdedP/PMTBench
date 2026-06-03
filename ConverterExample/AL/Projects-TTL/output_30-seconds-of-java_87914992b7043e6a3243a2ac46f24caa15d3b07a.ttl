@@ -4,7 +4,7 @@
 <pm:project#30-seconds-of-java_8791499> a pm:Project ;
     schema:name "30-seconds-of-java" ;
     schema:codeRepository "https://github.com/shekhargulati/30-seconds-of-java"^^schema:URL ;
-    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    schema:citation <pm:paper#pmtbenchAL> ; 
     pm:commit "87914992b7043e6a3243a2ac46f24caa15d3b07a" ;
     pm:ttlFile "ConverterExample/AL/Projects-TTL/output_30-seconds-of-java_87914992b7043e6a3243a2ac46f24caa15d3b07a.ttl" .
 

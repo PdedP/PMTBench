@@ -4,7 +4,7 @@
 <pm:project#ACAP25_961e1fa> a pm:Project ;
     schema:name "ACAP25" ;
     schema:codeRepository "https://github.com/mcanthony/ACAP25"^^schema:URL ;
-    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    schema:citation <pm:paper#pmtbenchAL> ; 
     pm:commit "961e1fa90922efef71894247705670530c24657b" ;
     pm:ttlFile "ConverterExample/AL/Projects-TTL/output_ACAP25_961e1fa90922efef71894247705670530c24657b.ttl" .
 

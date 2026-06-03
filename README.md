@@ -135,7 +135,7 @@ The result will be the same as in the previous example, but including all the ve
 ```
 python3 pmtbench.py \
     -i FilterExample/index.ttl \
-    -b "staticAnalysis execution" \
+    -b staticAnalysis execution \
     -t PIT_1.15.8 \
     -l java \
     -o FilterExample/filter3.csv

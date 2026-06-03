@@ -263,7 +263,7 @@
 # Definition of class Execution (test suite or test cases execution on a mutant) and its properties
 :Execution a rdfs:Class ;
     rdfs:label "Execution" ;
-    rdfs:comment "Result of test execution on a [[Mutant]]. The execution identifier should include the mutant identifier followed by the test suite identifier" .
+    rdfs:comment "Result of test execution on a [[Mutant]]. The execution identifier should include the mutant identifier followed by the test suite identifier (and, optionally, the coverage tool identifier if different tools are used to collect coverage data)" .
 
 # Association between the execution data and the coverage tool
 :analyzedByTool a rdfs:Property ;

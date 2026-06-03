@@ -4,21 +4,21 @@
 <pm:project#Csv_1> a pm:Project ;
     schema:name "Csv" ;
     schema:codeRepository "https://github.com/apache/commons-csv/tree/de1838ea067f3fbc4c7c21b9eeae077c739ecb73"^^schema:URL ;
-    schema:citation "<pm:paper#zhao2024spotting>" ; 
+    schema:citation <pm:paper#zhao2024spotting> ; 
     schema:version "1" ;
     pm:ttlFile "ConverterExample/NL-tc/Projects-TTL/output_Csv_1.ttl" .
 
 <pm:project#Csv_5> a pm:Project ;
     schema:name "Csv" ;
     schema:codeRepository "https://github.com/apache/commons-csv/tree/73cc5246cf789db8f459e2f539831b6e91bedd26"^^schema:URL ;
-    schema:citation "<pm:paper#zhao2024spotting>" ; 
+    schema:citation <pm:paper#zhao2024spotting> ; 
     schema:version "5" ;
     pm:ttlFile "ConverterExample/NL-tc/Projects-TTL/output_Csv_5.ttl" .
 
 <pm:project#Csv_10> a pm:Project ;
     schema:name "Csv" ;
     schema:codeRepository "https://github.com/apache/commons-csv/tree/1282503fb97d621b4225bd031757adbfada66181"^^schema:URL ;
-    schema:citation "<pm:paper#zhao2024spotting>" ; 
+    schema:citation <pm:paper#zhao2024spotting> ; 
     schema:version "10" ;
     pm:ttlFile "ConverterExample/NL-tc/Projects-TTL/output_Csv_10.ttl" .
 

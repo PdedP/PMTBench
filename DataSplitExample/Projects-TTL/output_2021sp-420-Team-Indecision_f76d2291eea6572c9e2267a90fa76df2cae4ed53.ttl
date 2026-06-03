@@ -4,7 +4,7 @@
 <pm:project#2021sp-420-Team-Indecision_f76d229> a pm:Project ;
     schema:name "2021sp-420-Team-Indecision" ;
     schema:codeRepository "https://github.com/mucsci-students/2021sp-420-Team-Indecision"^^schema:URL ;
-    schema:citation "<pm:paper#pmtbenchAL>" ; 
+    schema:citation <pm:paper#pmtbenchAL> ; 
     pm:commit "f76d2291eea6572c9e2267a90fa76df2cae4ed53" ;
     pm:ttlFile "Projects-TTL/output_2021sp-420-Team-Indecision_f76d2291eea6572c9e2267a90fa76df2cae4ed53.ttl" .
 
