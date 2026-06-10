@@ -58,6 +58,7 @@ tests = {
 }
 
 
+# Function to set global determinism
 def set_global_determinism(seed: int) -> None:
     """
     Set the random seed for all randomness directly controlled by this script.
@@ -150,14 +151,26 @@ def plot_confusion_matrix(true_labels, predicted_labels, labels, output_file):
     :param output_file: File to save the confusion matrix
     """
     cm = confusion_matrix(true_labels, predicted_labels, labels=labels)
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
-                xticklabels=labels, yticklabels=labels)
-    plt.xlabel("Predicted Label")
-    plt.ylabel("True Label")
-    plt.title("Confusion Matrix")
+    plt.figure(figsize=(4.2, 3.6), dpi=300)
+    ax = sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=labels,
+        yticklabels=labels,
+        annot_kws={"size": 16},
+        cbar_kws={"shrink": 0.85}
+    )
+    ax.set_xlabel("Predicted label", fontsize=14)
+    ax.set_ylabel("True label", fontsize=14)
+    ax.set_title("Confusion matrix", fontsize=15)
+    ax.tick_params(axis="x", labelsize=12)
+    ax.tick_params(axis="y", labelsize=12)
+    cbar = ax.collections[0].colorbar
+    cbar.ax.tick_params(labelsize=11)
     plt.tight_layout()
-    plt.savefig(output_file)
+    plt.savefig(output_file, dpi=300, bbox_inches="tight", pad_inches=0.03)
     print(f"Confusion matrix saved to {output_file}")
     plt.close()
 
@@ -891,6 +904,7 @@ def load_config_file(config_path: str) -> dict:
         )
 
     return config or {}
+
 
 # Function to maintain CSV format
 def to_csv(value):
