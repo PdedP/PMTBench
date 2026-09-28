@@ -27,7 +27,7 @@ PMTBench is built around two main components:
   - [Data split](#data-split)
   - [Evaluation of PMT models](#evaluation-of-pmt-models)
   - [Evaluating with existing data](#evaluating-with-existing-data)
-- [YAML-based execution configuration](#yaml-based-execution-configuration)
+- [YAML-based execution configuration and manifests](#yaml-based-execution-configuration-and-manifests)
 - [Installation](#installation)
 
 
@@ -204,7 +204,8 @@ To evaluate a PMT model with PMTBench, you will need to provide a script that ha
 -   `--test_file`: path to the CSV file with test data.
 -   `--output_file`: path where the script should write its predictions.
 -   `--seed`: random seed for reproducibility (optional).
-    
+-   `--model-config`: path to the model configuration file (optional).
+
 The script should generate a CSV file with one row per mutant. Each row should include at least three columns: one for the project, one for the true label, and one for the predicted label. The column names have to be exactly `Project`, `True Label` and `Predicted Label`. Optionally, a fourth column named `Killing Probability` can be included, with a list of predicted probabilities. This is explained in further detail below.
 
 > **Note:** The column `Project` is used to compute the mutation score error per project.
@@ -255,7 +256,8 @@ python3 pmtbench.py \
 ```
 After running the script, PMTBench uses the generated `split_8020_predicted.csv` file to evaluate the model performance and print test-suite level metrics.
 
-By default, PMTBench uses a fixed random seed so that results are fully reproducible. If you want to use a different seed, you can pass it with the `--seed` option, as shown in the following command:
+By default, PMTBench uses a fixed random seed so that results are fully reproducible. If you want to use a different seed, you can pass it with the `--seed` option. You can also provide a model configuration file using the optional `--model-config` option, as shown in the following command:
+
 ```
 python3 pmtbench.py \
     -i EvaluationExample/index.ttl \
@@ -263,8 +265,9 @@ python3 pmtbench.py \
     -c pmtbenchAL \
     -b execution \
     -o EvaluationExample/split_8020.csv \
-    --ml_script EvaluationExample/decision_tree.py
-    --seed 25
+    --ml_script EvaluationExample/decision_tree.py \
+    --seed 25 \
+    --model-config EvaluationExample/decision_tree_config.yaml
 ```
 
 #### Test-case level prediction
@@ -346,9 +349,9 @@ python3 pmtbench.py \
 This command runs the provided model on the existing data and produces the same evaluation output as before (Test-suite level prediction scenario)
 
 
-## YAML-based execution configuration
+## YAML-based execution configuration and manifests
 
-Alternatively to passing parameters directly through the command line, PMTBench also supports execution through YAML configuration files. An initial configuration template can be found in the file `pmtbench-input.yml`.
+Alternatively to passing parameters directly through the command line, PMTBench supports execution through YAML configuration files. An initial configuration template can be found in the file `pmtbench-input.yml`.
 
 The configuration file is organized into the following sections:
 
@@ -360,12 +363,12 @@ The configuration file is organized into the following sections:
 - Input / Output
 
 Once configured, PMTBench can be executed as follows:
-```
+
+```bash
 python pmtbench.py -cfg pmtbench-input.yml
 ```
 
-This mechanism aligns well with the reproducibility goals of PMTBench, since the configuration file stores the exact execution setup and can be easily shared together with the generated results.
-
+For each execution, PMTBench also generates a YAML manifest that records the execution information, linking effective arguments, code identity, partitions, environment, and output artifacts. The configuration file and the generated manifest provide complementary support for reproducibility: the former specifies the intended execution setup, while the latter records the setup and artifacts of the execution performed.
 
 ## Installation
 

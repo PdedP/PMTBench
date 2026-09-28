@@ -89,7 +89,7 @@ def build_execution_block_tc(test_paths, test_killing_paths, test_passing_paths,
     # Step 1: Reconstruct test_paths by adding missing ones from killing/passing
     missing_tests = (killing_tests | passing_tests) - set(test_paths)
     if missing_tests:
-        print(f"[INFO] Adding missing tests to test_paths: {missing_tests}")
+        print(f"[INFO] Adding missing tests to test_paths: {missing_tests} for mutant {mutant_id}")
         test_paths = list(test_paths) + list(missing_tests)
 
     executed_tests = []
@@ -283,8 +283,14 @@ def build_file_rdf(row, project_id, language, file_ids):
 
     # Get the package and file name
     class_path = row['Class']
-    package, file_name = class_path.rsplit('.', 1)
-    
+    parts = class_path.rsplit('.', 1)
+
+    if len(parts) == 2:
+        package, file_name = parts
+    else:
+        package = ""
+        file_name = class_path
+
     # Generate the file identifier
     file_id = f"{project_id}_{class_path}.{language}"
 
@@ -294,7 +300,7 @@ def build_file_rdf(row, project_id, language, file_ids):
 <pm:file#{file_id}> a pm:File ;
     schema:name "{file_name}" ;
     schema:programmingLanguage "{language}" ;
-    pm:extension "java" ;
+    pm:extension "{language}" ;
     pm:fileName "{file_name}.{language}" ;
     pm:package "{package}" ;
     pm:partOfProject <pm:project#{project_id}> .
@@ -378,6 +384,7 @@ def build_mutation_rdf(config, project_id, testsuite_id, test_path_to_id):
 def build_testcases_rdf(config, testsuite_id):
     testcases_data = []
     test_path_to_id = {}
+    language = config["language"]
 
     test_map_path = Path(str(config["project_csv"]).replace("_results.csv", "_test_map.csv"))
     if not test_map_path.exists():
@@ -389,9 +396,15 @@ def build_testcases_rdf(config, testsuite_id):
         for row in reader:
             test_path = row['TestMethod']
             test_code = row['TestMethodCode']
-            try:
-                package_test, testfile_name, test_name = test_path.rsplit('.', 2)
-            except ValueError:
+
+            parts = test_path.rsplit('.', 2)
+
+            if len(parts) == 3:
+                package_test, testfile_name, test_name = parts
+            elif len(parts) == 2:
+                package_test = ""
+                testfile_name, test_name = parts
+            else:
                 print(f"Unexpected format in TestMethod: {test_path}")
                 continue
 
@@ -402,7 +415,7 @@ def build_testcases_rdf(config, testsuite_id):
 <pm:test#{test_id}> a pm:Test ;
     schema:name "{test_name}" ;
     pm:testMethodName "{package_test}.{testfile_name}.{test_name}" ;
-    pm:fileName "{testfile_name}.java" ;
+    pm:fileName "{testfile_name}.{language}" ;
     pm:package "{package_test}" ;
     pm:testMethodCode {json.dumps(test_code)} ;
     pm:partOfTestSuite <pm:testsuite#{testsuite_id}> .
@@ -491,7 +504,7 @@ def build_project_rdf(config):
 <pm:project#{project_id}> a pm:Project ;
     schema:name "{project_name}" ;
     schema:codeRepository "{project_url}"^^schema:URL ;
-    schema:citation {citation_id} ; 
+    schema:citation "{citation_id}" ; 
     schema:version "{project_version}" ;
     pm:ttlFile "{project_ttl}" .
 """.strip())
