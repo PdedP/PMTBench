@@ -1,5 +1,9 @@
 ### Conversion
 
+Before running this example, please read the information provided in the [Converter](https://github.com/PdedP/PMTBench/tree/main#converter) section to learn about the requirements for the converter to work correctly.
+
+This example illustrates the execution of the converter through three different scenarios.
+
 > **Note:** remove or rename the index file `index.ttl` before executing the following scenarios.
 
 - **Scenario 1:** AL channel and test suite granularity

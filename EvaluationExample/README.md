@@ -9,12 +9,12 @@ python3 EvaluationExample/decision_tree.py --training_file EvaluationExample/out
 
 - Execution and evaluation of the decision tree model with PMTBench (execution block, citation 'pmtbenchAL' and partition 80% training-20% test):
 ```
-python3 pmtbench.py -i EvaluationExample/index.ttl -p 80,20 -c pmtbenchAL -b execution -o EvaluationExample/split_8020.csv --ml_script EvaluationExample/decision_tree.py
+python3 pmtbench.py -i EvaluationExample/index.ttl -p 80,20 -c pmtbenchAL -b execution -o EvaluationExample/split_8020.csv --ml_script EvaluationExample/decision_tree.py --model-config EvaluationExample/decision_tree_config.yml
 ```
 
 - Evaluation of the decision tree model with existing data:
 ```
-python3 pmtbench.py --existing_data -tr EvaluationExample/output_training.csv -te EvaluationExample/output_test.csv -o EvaluationExample/output.csv -m EvaluationExample/decision_tree.py -cm EvaluationExample/matrix-dt.png -mc EvaluationExample/metrics-dt.csv
+python3 pmtbench.py --existing_data -tr EvaluationExample/output_training.csv -te EvaluationExample/output_test.csv -o EvaluationExample/output.csv -m EvaluationExample/decision_tree.py --model-config EvaluationExample/decision_tree_config.yml -cm EvaluationExample/matrix-dt.png -mc EvaluationExample/metrics-dt.csv
 ```
 
 You can also run these examples using the configuration files:

@@ -1,0 +1,44 @@
+pmtbench:
+  script: pmtbench.py
+  script_sha256: fdbc3123543cf2d4625ad46c2bbfc04a40225470a4dccae6a0d79e4c7ab975bb
+  version: 0b4d0c4
+  git_commit: 0b4d0c4bf5e9dc2ac4be4b8a924b3d57c17d0b57
+execution:
+  seed: 42
+  effective_arguments:
+    config: FilterExample/pmtbench-filter3.yml
+    language: java
+    tool: PIT_1.15.8
+    blocks:
+    - staticAnalysis
+    - execution
+    index: FilterExample/index.ttl
+    output: FilterExample/filter3.csv
+environment:
+  python:
+    version: 3.12.3
+    implementation: CPython
+  platform:
+    system: Linux
+    release: 6.6.87.2-microsoft-standard-WSL2
+    machine: x86_64
+  dependencies:
+    capture: captured
+    snapshot:
+      path: FilterExample/filter3_environment.txt
+      sha256: 13a43a952ab84e8f68a77c9c7b4c235982a685213f877efdd6d3ae312c473e24
+dataset:
+  index: FilterExample/index.ttl
+  filters:
+    language: java
+    tool: PIT_1.15.8
+    blocks:
+    - staticAnalysis
+    - execution
+partition:
+  strategy: none
+  resolved: {}
+outputs:
+  dataset:
+    path: FilterExample/filter3.csv
+    sha256: d079fbc7adb98dfaa08ad6e3b1946cb5e655cd40f7e96aee7bdb5d230785cd74
