@@ -145,4 +145,4 @@ io:
   index: DatasetAL/index.ttl
 
   # Output CSV filename
-  output: EvaluationExample/output.csv
+  output: ../PMTBench-output/EvaluationExample/output.csv

@@ -143,4 +143,4 @@ io:
   index: DataSplitExample/index.ttl
 
   # Output CSV filename
-  output: ../PMTBench-output/DataSplitExample/split_Csv.csv
+  output: DataSplitExample/output/split_Csv.csv

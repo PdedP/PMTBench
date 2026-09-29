@@ -1,0 +1,59 @@
+pmtbench:
+  script: pmtbench.py
+  script_sha256: fdbc3123543cf2d4625ad46c2bbfc04a40225470a4dccae6a0d79e4c7ab975bb
+  version: 1e86be0
+  git_commit: 1e86be0b614081928876c86804bd04bbbb00fa89
+execution:
+  seed: 42
+  effective_arguments:
+    config: DataSplitExample/pmtbench-partitioning3.yml
+    blocks:
+    - naturalLanguage
+    train_projects:
+    - Csv_1
+    - Csv_5
+    test_projects:
+    - Csv_10
+    index: DataSplitExample/index.ttl
+    output: split_Csv.csv
+environment:
+  python:
+    version: 3.12.3
+    implementation: CPython
+  platform:
+    system: Linux
+    release: 6.6.87.2-microsoft-standard-WSL2
+    machine: x86_64
+  dependencies:
+    capture: captured
+    snapshot:
+      path: split_Csv_environment.txt
+      sha256: 13a43a952ab84e8f68a77c9c7b4c235982a685213f877efdd6d3ae312c473e24
+dataset:
+  index: DataSplitExample/index.ttl
+  filters:
+    blocks:
+    - naturalLanguage
+partition:
+  strategy: manual_projects
+  resolved:
+    training:
+      path: split_Csv_training.csv
+      sha256: 80f3e8364107cb9e85fb3f68e419fe63d6d997a727c52cd6d3e267d398cceade
+      instances: 586
+      projects:
+      - Csv_1
+      - Csv_5
+    test:
+      path: split_Csv_test.csv
+      sha256: e68d1ae7dda13df6bad07d9c6c73ea6877a8f1e94e282b8c199cab852e132939
+      instances: 424
+      projects:
+      - Csv_10
+outputs:
+  training:
+    path: split_Csv_training.csv
+    sha256: 80f3e8364107cb9e85fb3f68e419fe63d6d997a727c52cd6d3e267d398cceade
+  test:
+    path: split_Csv_test.csv
+    sha256: e68d1ae7dda13df6bad07d9c6c73ea6877a8f1e94e282b8c199cab852e132939

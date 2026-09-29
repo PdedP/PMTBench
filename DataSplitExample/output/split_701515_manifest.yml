@@ -1,0 +1,74 @@
+pmtbench:
+  script: pmtbench.py
+  script_sha256: fdbc3123543cf2d4625ad46c2bbfc04a40225470a4dccae6a0d79e4c7ab975bb
+  version: 1e86be0
+  git_commit: 1e86be0b614081928876c86804bd04bbbb00fa89
+execution:
+  seed: 42
+  effective_arguments:
+    config: DataSplitExample/pmtbench-partitioning2.yml
+    citation: pmtbenchAL
+    blocks:
+    - staticAnalysis
+    - execution
+    partition: 70,15,15
+    index: DataSplitExample/index.ttl
+    output: split_701515.csv
+environment:
+  python:
+    version: 3.12.3
+    implementation: CPython
+  platform:
+    system: Linux
+    release: 6.6.87.2-microsoft-standard-WSL2
+    machine: x86_64
+  dependencies:
+    capture: captured
+    snapshot:
+      path: split_701515_environment.txt
+      sha256: 13a43a952ab84e8f68a77c9c7b4c235982a685213f877efdd6d3ae312c473e24
+dataset:
+  index: DataSplitExample/index.ttl
+  citation: pmtbenchAL
+  filters:
+    blocks:
+    - staticAnalysis
+    - execution
+partition:
+  strategy: random_project_percentages
+  resolved:
+    training:
+      path: split_701515_training.csv
+      sha256: 2609684f61733baac77277faa96abcbea2797bc7b816c95d31dbaaec83f9dcb0
+      instances: 715
+      projects:
+      - 2021sp-420-Team-Indecision_f76d229
+      - 30-seconds-of-java_8791499
+      - ACAP25_961e1fa
+      - Agents_e1b_1345f6d
+    validation:
+      path: split_701515_validation.csv
+      sha256: ae8894ce7ecac72e16b4129b164a5acc53e9e01c53f13d62fc80183c94c583c6
+      instances: 105
+      projects:
+      - mockkid_5ecadf8
+    test:
+      path: split_701515_test.csv
+      sha256: e4f92fe32ccd577a5b63ec503e30245ce260e28bf5354f0bfe54b1c5fd80ca46
+      instances: 266
+      projects:
+      - edi-debatcher_0658bc2
+  requested_percentages:
+    training: 70
+    validation: 15
+    test: 15
+outputs:
+  training:
+    path: split_701515_training.csv
+    sha256: 2609684f61733baac77277faa96abcbea2797bc7b816c95d31dbaaec83f9dcb0
+  validation:
+    path: split_701515_validation.csv
+    sha256: ae8894ce7ecac72e16b4129b164a5acc53e9e01c53f13d62fc80183c94c583c6
+  test:
+    path: split_701515_test.csv
+    sha256: e4f92fe32ccd577a5b63ec503e30245ce260e28bf5354f0bfe54b1c5fd80ca46
