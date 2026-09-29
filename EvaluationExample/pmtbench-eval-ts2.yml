@@ -130,10 +130,10 @@ ml:
 evaluation:
 
   # Filename for the confusion matrix image Example: confusion_matrix_file: matrix.png
-  confusion_matrix_file: EvaluationExample/matrix-dt.png
+  confusion_matrix_file: ../PMTBench-output/EvaluationExample/matrix-dt.png
 
   # Filename for the metrics CSV file. Example: metrics_csv_file: metrics.csv
-  metrics_csv_file: EvaluationExample/metrics-dt.csv
+  metrics_csv_file: ../PMTBench-output/EvaluationExample/metrics-dt.csv
 
 # ============================================================
 # Input / Output
