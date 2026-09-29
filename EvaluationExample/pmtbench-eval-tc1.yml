@@ -143,4 +143,4 @@ io:
   index: EvaluationExample/index.ttl
 
   # Output CSV filename
-  output: ../PMTBench-output/EvaluationExample/split_Csv_1_5.csv
+  output: EvaluationExample/split_Csv_1_5.csv

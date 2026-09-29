@@ -131,7 +131,7 @@ evaluation:
   confusion_matrix_file:
 
   # Filename for the metrics CSV file. Example: metrics_csv_file: metrics.csv
-  metrics_csv_file: ../PMTBench-output/EvaluationExample/metrics-smp.csv
+  metrics_csv_file: EvaluationExample/metrics-smp.csv
 
 # ============================================================
 # Input / Output
@@ -143,4 +143,4 @@ io:
   index: EvaluationExample/index.ttl
 
   # Output CSV filename
-  output: ../PMTBench-output/EvaluationExample/split_Csv_1_5_prob.csv
+  output: EvaluationExample/split_Csv_1_5_prob.csv

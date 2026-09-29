@@ -1,0 +1,83 @@
+pmtbench:
+  script: pmtbench.py
+  script_sha256: fdbc3123543cf2d4625ad46c2bbfc04a40225470a4dccae6a0d79e4c7ab975bb
+  version: 880b44a
+  git_commit: 880b44ac86a63abb6d5c6debdfab9b544a9d5b4b
+execution:
+  seed: 42
+  effective_arguments:
+    config: EvaluationExample/pmtbench-eval-ts2.yml
+    existing_data: true
+    training_file: EvaluationExample/output_training.csv
+    test_file: EvaluationExample/output_test.csv
+    ml_script: EvaluationExample/decision_tree.py
+    model_config: EvaluationExample/decision_tree_config.yml
+    confusion_matrix_file: matrix-dt.png
+    metrics_csv_file: metrics-dt.csv
+    output: output.csv
+environment:
+  python:
+    version: 3.12.3
+    implementation: CPython
+  platform:
+    system: Linux
+    release: 6.6.87.2-microsoft-standard-WSL2
+    machine: x86_64
+  dependencies:
+    capture: captured
+    snapshot:
+      path: output_environment.txt
+      sha256: 13a43a952ab84e8f68a77c9c7b4c235982a685213f877efdd6d3ae312c473e24
+dataset:
+  source: existing_data
+partition:
+  strategy: existing_data
+  resolved:
+    training:
+      path: EvaluationExample/output_training.csv
+      sha256: 24a62e8ae737b8c566777648202789afa6c83c69c174a6ff2dd0926894f82720
+      instances: 841
+      projects:
+      - 2021sp-420-Team-Indecision_f76d229
+      - ACAP25_961e1fa
+      - Agents_e1b_1345f6d
+      - edi-debatcher_0658bc2
+    test:
+      path: EvaluationExample/output_test.csv
+      sha256: c87815ae03df3887f446231a6eafa7343b33cb1155620eeb82cc995b4ec1b670
+      instances: 245
+      projects:
+      - 30-seconds-of-java_8791499
+      - mockkid_5ecadf8
+model:
+  implementation:
+    path: EvaluationExample/decision_tree.py
+    sha256: 091f75debb6c56d8d374dcbc7d6c28a2cefb434dcce85036e93cd9937c97d028
+  configuration:
+    path: EvaluationExample/decision_tree_config.yml
+    sha256: ac36b51f167b17820d04e2ed7547ff789d7aa499388019ee6ce76251e1e692f7
+    parameters:
+      model: DecisionTreeClassifier
+      parameters:
+        criterion: gini
+        splitter: best
+        max_depth: null
+        min_samples_split: 2
+        min_samples_leaf: 1
+        min_weight_fraction_leaf: 0.0
+        max_features: null
+        max_leaf_nodes: null
+        min_impurity_decrease: 0.0
+        class_weight: null
+        ccp_alpha: 0.0
+        monotonic_cst: null
+outputs:
+  predictions:
+    path: output_predicted.csv
+    sha256: 8b2ae79fc672352ac51f596c475d43ff24a40107111a0a8390745918d9c6bd8a
+  metrics:
+  - path: metrics-dt.csv
+    sha256: 20f19b3e6c6e2e9abd1bba4e940108d75e5aa503260d8590a2e38f35c62737b1
+  confusion_matrix:
+    path: matrix-dt.png
+    sha256: eef50abd1b35c32e2d0fc6cb6d1c58013abac0fc2a24570ce129de851fe7da6c

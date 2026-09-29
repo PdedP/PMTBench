@@ -1,0 +1,60 @@
+pmtbench:
+  script: pmtbench.py
+  script_sha256: fdbc3123543cf2d4625ad46c2bbfc04a40225470a4dccae6a0d79e4c7ab975bb
+  version: 880b44a
+  git_commit: 880b44ac86a63abb6d5c6debdfab9b544a9d5b4b
+execution:
+  seed: 42
+  effective_arguments:
+    config: EvaluationExample/pmtbench-eval-tc2.yml
+    existing_data: true
+    training_file: EvaluationExample/output_testcase_training.csv
+    test_file: EvaluationExample/output_testcase_test.csv
+    ml_script: EvaluationExample/sim_testcase_pred.py
+    confusion_matrix_file: matrix-sm.png
+    metrics_csv_file: metrics-sm.csv
+    output: output_testcase.csv
+environment:
+  python:
+    version: 3.12.3
+    implementation: CPython
+  platform:
+    system: Linux
+    release: 6.6.87.2-microsoft-standard-WSL2
+    machine: x86_64
+  dependencies:
+    capture: captured
+    snapshot:
+      path: output_testcase_environment.txt
+      sha256: 13a43a952ab84e8f68a77c9c7b4c235982a685213f877efdd6d3ae312c473e24
+dataset:
+  source: existing_data
+partition:
+  strategy: existing_data
+  resolved:
+    training:
+      path: EvaluationExample/output_testcase_training.csv
+      sha256: cd636d9872ab493b96c4f00f979f36610b98d60d2cadf54a5de5427971ad9a4f
+      instances: 194
+      projects:
+      - Csv_1
+    test:
+      path: EvaluationExample/output_testcase_test.csv
+      sha256: 154f459a832398b9761d45b4ecc16cdd024076f1c0c32a6c9b904f5c9c2f1c4d
+      instances: 392
+      projects:
+      - Csv_5
+model:
+  implementation:
+    path: EvaluationExample/sim_testcase_pred.py
+    sha256: 1d6ba9219b03ee432064e442818008b738b7f06c2a876633971331c9b0606c0e
+outputs:
+  predictions:
+    path: output_testcase_predicted.csv
+    sha256: 3e988783ba13d384887a0c169554084829621dc39260f4a5da78b3ef309c6022
+  metrics:
+  - path: metrics-sm.csv
+    sha256: 9e56cecdd4442f53b12a0424471847b1f3080e83f334f15984b6fbd2c9bb3b40
+  confusion_matrix:
+    path: matrix-sm.png
+    sha256: 60ddfc3e7216d87cec9c7c7da299aea7570df33d532bae1930afdeffc6968057

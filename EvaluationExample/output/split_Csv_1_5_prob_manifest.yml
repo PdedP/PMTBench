@@ -1,0 +1,74 @@
+pmtbench:
+  script: pmtbench.py
+  script_sha256: fdbc3123543cf2d4625ad46c2bbfc04a40225470a4dccae6a0d79e4c7ab975bb
+  version: 880b44a
+  git_commit: 880b44ac86a63abb6d5c6debdfab9b544a9d5b4b
+execution:
+  seed: 42
+  effective_arguments:
+    config: EvaluationExample/pmtbench-eval-tc3.yml
+    blocks:
+    - naturalLanguage
+    train_projects:
+    - Csv_1
+    test_projects:
+    - Csv_5
+    ml_script: EvaluationExample/sim_testcase_pred_prob.py
+    thresholds:
+    - 0.1
+    - 0.25
+    metrics_csv_file: metrics-smp.csv
+    index: EvaluationExample/index.ttl
+    output: split_Csv_1_5_prob.csv
+environment:
+  python:
+    version: 3.12.3
+    implementation: CPython
+  platform:
+    system: Linux
+    release: 6.6.87.2-microsoft-standard-WSL2
+    machine: x86_64
+  dependencies:
+    capture: captured
+    snapshot:
+      path: split_Csv_1_5_prob_environment.txt
+      sha256: 13a43a952ab84e8f68a77c9c7b4c235982a685213f877efdd6d3ae312c473e24
+dataset:
+  index: EvaluationExample/index.ttl
+  filters:
+    blocks:
+    - naturalLanguage
+partition:
+  strategy: manual_projects
+  resolved:
+    training:
+      path: split_Csv_1_5_prob_training.csv
+      sha256: d6397a58bfda380fdfaab1fcb3747ac0b5b87320cf1682ffcf19c01aadc7c47b
+      instances: 194
+      projects:
+      - Csv_1
+    test:
+      path: split_Csv_1_5_prob_test.csv
+      sha256: 586f21fda595bbbb87f843fb0d74e7cd8c1253942006feda68a0772b4b644515
+      instances: 392
+      projects:
+      - Csv_5
+model:
+  implementation:
+    path: EvaluationExample/sim_testcase_pred_prob.py
+    sha256: 9f8cf72cc49aca888a037d0ca30956e9e240cf1943e6ab4d49cec708b95e9492
+outputs:
+  training:
+    path: split_Csv_1_5_prob_training.csv
+    sha256: d6397a58bfda380fdfaab1fcb3747ac0b5b87320cf1682ffcf19c01aadc7c47b
+  test:
+    path: split_Csv_1_5_prob_test.csv
+    sha256: 586f21fda595bbbb87f843fb0d74e7cd8c1253942006feda68a0772b4b644515
+  predictions:
+    path: split_Csv_1_5_prob_predicted.csv
+    sha256: d793f16892ae43f4795d0976a77996778f0a6d5d15ff34a96ee34ad360d9e6c5
+  metrics:
+  - path: metrics-smp_th0.1.csv
+    sha256: 5cbe853b537349373bf378f93a947a23c464f3b88a9c20314201a9f72b4ed169
+  - path: metrics-smp_th0.25.csv
+    sha256: c73b5be423b5ed8f120f8fb835da0a05e11d09a8a34ab10f6df860e6a868dd9c
